@@ -59,15 +59,7 @@ function getPromiseResult(source) {
  * [Promise.reject(1), Promise.reject(2), Promise.reject(3)]    => Promise rejected
  */
 function getFirstResolvedPromiseResult(promises) {
-  return Promise.all(
-    promises.map((promise) => promise.catch(() => undefined))
-  ).then((result) => {
-    const syu = result.find((succ) => succ !== undefined);
-    if (syu) {
-      return syu;
-    }
-    throw Error('');
-  });
+  return Promise.any(promises);
 }
 
 /**
